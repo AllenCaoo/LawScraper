@@ -1,4 +1,3 @@
-import sys
 import requests
 import threading
 from bs4 import BeautifulSoup
