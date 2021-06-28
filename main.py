@@ -1,5 +1,4 @@
 import sys
-
 import requests
 import threading
 from bs4 import BeautifulSoup
@@ -29,4 +28,5 @@ def re_init(ask=False):
         return
 
 if __name__ == "__main__":
+
     main()

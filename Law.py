@@ -1,3 +1,5 @@
+import sys
+import re
 import requests
 from bs4 import BeautifulSoup
 
@@ -11,4 +13,11 @@ class Law:
                 if anchor.text == "All Actions":
                     action_link = anchor.attrs['href']
                     break
-        self.action_link = "congress.gov" + action_link
+        self.action_link = "http://congress.gov" + action_link
+
+    def get_summary(self):
+        r = requests.get(self.action_link)
+        soup = BeautifulSoup(r.content, "html.parser")
+        info_link = soup.findAll("a", text=re.compile('All Information'), href=True)[0]
+        print(f"http://congress.gov{info_link['href']}")
+        sys.exit()
