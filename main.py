@@ -12,5 +12,12 @@ for tag in law_blocks:
     title = tag.find(class_="result-title")
     sponsor = tag.find(class_="result-item").find("a")
     print(f"{title.text}, sponsored by {sponsor.text}")
+    action_link = None
+    for item in tag.find_all(class_="result-item"):
+        for anchor in item.find_all("a"):
+            if anchor.text == "All Actions":
+                action_link = anchor.attrs['href']
+                break
+    print(action_link)
 
 
