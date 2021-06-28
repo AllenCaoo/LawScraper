@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from Law import Law
 
 
 def get_all_laws():
@@ -10,15 +11,11 @@ def get_all_laws():
     soup = BeautifulSoup(r.content, "html.parser")
     law_blocks = soup.find_all(class_="expanded")
     for tag in law_blocks:
-        title = tag.find(class_="result-title")
-        sponsor = tag.find(class_="result-item").find("a")
-        print(f"{title.text}, sponsored by {sponsor.text}")
-        action_link = None
-        for item in tag.find_all(class_="result-item"):
-            for anchor in item.find_all("a"):
-                if anchor.text == "All Actions":
-                    action_link = anchor.attrs['href']
-                    break
+        tag = Law(tag)
+        title = tag.title
+        sponsor = tag.sponsor
+        action_link = tag.action_link
+        print(f"{title}, sponsored by {sponsor}")
         print(action_link)
 
 get_all_laws()
