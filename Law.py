@@ -19,5 +19,4 @@ class Law:
         r = requests.get(self.action_link)
         soup = BeautifulSoup(r.content, "html.parser")
         info_link = soup.findAll("a", text=re.compile('All Information'), href=True)[0]
-        print(f"http://congress.gov{info_link['href']}")
-        sys.exit()
+        return "http://congress.gov" + info_link['href']
