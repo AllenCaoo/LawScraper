@@ -25,7 +25,7 @@ def re_init(ask=False):
         f.write(recent)
         f.close()
     else:
-        init()
+        re_init()
         return
 
 if __name__ == "__main__":
