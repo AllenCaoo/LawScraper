@@ -17,7 +17,7 @@ def get_all_laws():
         title = tag.title
         sponsor = tag.sponsor
         action_link = tag.action_link
-        print(tag.get_summary())
+        print(tag)
 
 get_all_laws()
 

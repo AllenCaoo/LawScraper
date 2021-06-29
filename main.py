@@ -27,5 +27,4 @@ def re_init(ask=False):
         return
 
 if __name__ == "__main__":
-
     main()

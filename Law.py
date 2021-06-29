@@ -44,8 +44,10 @@ class Law:
     def __repr__(self):
         BOLD = "\033[1m"
         BOLD_END = "\033[0m"
-        message = "The '"+ BOLD + self.title + BOLD_END + "' bill was just passed. \n" \
-                  "It was sponsored by " + BOLD + self.sponsor + BOLD_END
+        message = "The '"+ BOLD + self.title + BOLD_END + "' bill was just passed. \n\n" \
+                  "It was sponsored by " + BOLD + self.sponsor + BOLD_END + "\n\n" + \
+                  "Here is a quick summary: \n\n" + \
+                  self.get_summary()
         return message
 
     def __str__(self):
