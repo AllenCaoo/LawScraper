@@ -47,7 +47,7 @@ class Law:
         message = "The '"+ BOLD + self.title + BOLD_END + "' bill was just passed. \n\n" \
                   "It was sponsored by " + BOLD + self.sponsor + BOLD_END + "\n\n" + \
                   "Here is a quick summary: \n\n" + \
-                  self.get_summary()
+                  self.get_summary() + "\n\n"
         return message
 
     def __str__(self):
