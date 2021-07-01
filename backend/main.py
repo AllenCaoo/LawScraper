@@ -23,7 +23,7 @@ def main():
     password = getpass.getpass(prompt="Password? ")
     # re_init()
     message = make_email_message()
-    print(message)
+    send_email(message)
 
 
 def make_email_message():
@@ -47,7 +47,7 @@ def send_email(message):
     msg = EmailMessage()
     msg['Subject'] = 'New Laws Passed!'
     msg['From'] = EMAIL_ADDRESS
-    msg['To'] = 'allen.cao.ezio@gmail.com'  # Change later
+    msg['To'] =   # Change later
     msg.set_content(message)
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         smtp.login(EMAIL_ADDRESS, password)
