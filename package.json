@@ -1,0 +1,19 @@
+{
+  "name": "lawscraper",
+  "version": "1.0.0",
+  "description": "modules for lawscraper",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AllenCaoo/LawScraper.git"
+  },
+  "author": "Allen Cao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AllenCaoo/LawScraper/issues"
+  },
+  "homepage": "https://github.com/AllenCaoo/LawScraper#readme"
+}
