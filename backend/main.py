@@ -1,4 +1,5 @@
 import getpass
+import os
 
 import requests
 import time
@@ -7,26 +8,26 @@ from bs4 import BeautifulSoup
 import smtplib
 from email.message import EmailMessage
 
-
+# IMPORTANT: RUN FROM THE OUTERMOST DIRECTORY
 link = "https://www.congress.gov/search?pageSort=latestAction%3Adesc&q=%7B%22source%22%3A%" \
-           "22legislation%22%2C%22bill-status%22%3A%22law%22%7D"
+       "22legislation%22%2C%22bill-status%22%3A%22law%22%7D"
 
-email_address = None
+EMAIL_ADDRESS = None
 password = None
 
+
 def main():
-    global email_address, password
-    email_address = input("Email? ")
-    password = getpass.getpass()
-    while True:
-        re_init()
-        message = make_email_message()
-        send_email(message)
-        time.sleep(3600)
+    global EMAIL_ADDRESS, password
+    print(os.getcwd())
+    EMAIL_ADDRESS = input("Email? ")
+    password = getpass.getpass(prompt="Password? ")
+    # re_init()
+    message = make_email_message()
+    print(message)
 
 
 def make_email_message():
-    f = open(".info/most-recent.txt", "r")
+    f = open("backend/.info/most-recent.txt", "r")
     recent_title = f.read()
     f.close()
     r = requests.get(link)
@@ -35,10 +36,8 @@ def make_email_message():
     message = ""
     for law in law_blocks:
         if law.title == recent_title:
-            if not message:
-                break
-        else:
-            message += law
+            break
+        message += str(law)
     if message:
         return message
     return None
@@ -47,9 +46,12 @@ def make_email_message():
 def send_email(message):
     msg = EmailMessage()
     msg['Subject'] = 'New Laws Passed!'
-    msg['From'] = email_address
-    msg['To'] = 'YourAddress@gmail.com'  # Change later
+    msg['From'] = EMAIL_ADDRESS
+    msg['To'] = 'allen.cao.ezio@gmail.com'  # Change later
     msg.set_content(message)
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+        smtp.login(EMAIL_ADDRESS, password)
+        smtp.send_message(msg)
 
 
 def re_init(ask=False):
@@ -62,15 +64,14 @@ def re_init(ask=False):
     elif want_init == "y":
         r = requests.get(link)
         soup = BeautifulSoup(r.content, "html.parser")
-        recent_title = soup.find(class_="result-title bottom-padding").text
-        if recent_title[-1] == '.':
-            recent_title = recent_title[:-1]
+        recent_title = soup.find(class_="result-title bottom-padding").text.strip()
         f = open(".info/most-recent.txt", "w")
         f.write(recent_title)
         f.close()
     else:
         re_init()
         return
+
 
 if __name__ == "__main__":
     main()

@@ -2,6 +2,7 @@ import sys
 import requests
 from bs4 import BeautifulSoup
 from Law import Law
+from main import send_email
 
 
 def get_all_laws():
@@ -17,7 +18,3 @@ def get_all_laws():
         sponsor = tag.sponsor
         action_link = tag.action_link
         print(tag)
-
-get_all_laws()
-
-

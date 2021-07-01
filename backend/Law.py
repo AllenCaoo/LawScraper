@@ -5,8 +5,6 @@ from bs4 import BeautifulSoup
 class Law:
     def __init__(self, law_block):  # law_block is of expanded class
         self.title = law_block.find(class_="result-title").text.strip()
-        if self.title[-1] == '.':
-            self.title = self.title[:-1]
         self.sponsor = law_block.find(class_="result-item").find("a").text
         action_link = None
         for item in law_block.find_all(class_="result-item"):
@@ -42,10 +40,8 @@ class Law:
 
 
     def __repr__(self):
-        BOLD = "\033[1m"
-        BOLD_END = "\033[0m"
-        message = "The '"+ BOLD + self.title + BOLD_END + "' bill was just passed. \n\n" \
-                  "It was sponsored by " + BOLD + self.sponsor + BOLD_END + "\n\n" + \
+        message = "The '"+ self.title + "' bill was just passed. \n\n" \
+                  "It was sponsored by " +  self.sponsor + "\n\n" + \
                   "Here is a quick summary: \n\n" + \
                   self.get_summary() + "\n\n"
         return message
