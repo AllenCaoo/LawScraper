@@ -1,12 +1,12 @@
 import getpass
 import os
-
 import requests
 import time
 from Law import Law
 from bs4 import BeautifulSoup
 import smtplib
 from email.message import EmailMessage
+from datetime import date
 
 # IMPORTANT: RUN FROM THE OUTERMOST DIRECTORY
 link = "https://www.congress.gov/search?pageSort=latestAction%3Adesc&q=%7B%22source%22%3A%" \
@@ -45,7 +45,8 @@ def make_email_message():
 
 def send_email(message):
     msg = EmailMessage()
-    msg['Subject'] = 'New Laws Passed!'
+    d = date.today().strftime("%B %d, %Y")
+    msg['Subject'] = 'New Laws Passed on {today}!'.format(today=d)
     msg['From'] = EMAIL_ADDRESS
     msg['To'] =   # Change later
     msg.set_content(message)
