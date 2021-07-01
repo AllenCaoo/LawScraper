@@ -14,6 +14,13 @@
     background-repeat: no-repeat;
     background-position: center;
 }
+.submission {
+    text-align: center;
+}
+
+.body {
+    text-align: center;
+}
 
 </style>
 
@@ -22,9 +29,11 @@
     <p>Made by Allen Cao</p>
 </div>
 
-<body>
+<body class=submission>
     Want to receive emails about new laws being passed?
     <form><br>
+        Enter your first name: <input type="text" id="firstname" /><br><br>
+        Enter your last name: <input type="text" id="lastname" /><br><br>
         Enter your email: <input type="text" id="email" /><br><br>
         <input type="submit" value="Submit" onclick="formdata()" /><br>
     </form>
