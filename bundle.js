@@ -12,7 +12,7 @@ function formdata() {
     //});
     if (first && last && email && validateEmail(email)) {
         alert("You have subscribed");
-        saveInfo();
+        saveInfo(first + " " + last, email);
     }
 }
 
@@ -22,8 +22,20 @@ function validateEmail(email) {
 }
 
 
-function saveInfo() {
-    
+function saveInfo(name, email) {
+    let fileName = "backend/.info/subs.JSON";
+    var data = fs.readFileSync(fileName);
+    var dict = JSON.parse(data);
+    let entry = {
+        name: email
+    }
+    dict.push(entry);
+    var newData = JSON.stringify(dict);
+    fs.writeFile('data.json', newData, err => {
+        // error checking
+        if(err) throw err;
+        console.log("New data added");
+    });
 }
 window.formdata = formdata;
 window.validateEmail = validateEmail;

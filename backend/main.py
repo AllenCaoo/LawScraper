@@ -48,7 +48,7 @@ def send_email(message):
     d = date.today().strftime("%B %d, %Y")
     msg['Subject'] = 'New Laws Passed on {today}!'.format(today=d)
     msg['From'] = EMAIL_ADDRESS
-    msg['To'] =   # Change later
+    msg['To'] = 'allen.cao.ezio@gmail.com'  # Change later
     msg.set_content(message)
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         smtp.login(EMAIL_ADDRESS, password)
