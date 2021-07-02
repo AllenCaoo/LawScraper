@@ -24,7 +24,7 @@ function validateEmail(email) {
 
 function saveInfo(name, email) {
     let fileName = "backend/.info/subs.JSON";
-    var data = fs.readFileSync(fileName);
+    var data = fs.readFileSync(fileName); // TODO: Error right here and needs to be fixed
     var dict = JSON.parse(data);
     let entry = {
         name: email
