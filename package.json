@@ -19,6 +19,7 @@
   "dependencies": {
     "browserify-shim": "^3.8.14",
     "requirejs": "^2.3.6",
-    "save": "^2.4.0"
+    "save": "^2.4.0",
+    "uniq": "^1.0.1"
   }
 }
