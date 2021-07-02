@@ -5,7 +5,7 @@
 <title>LawScraper</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="">
-<script src="main.js"></script>
+<script src="./dist/bundle.js"></script>
 <style>
 .title {
     height: 400px;
@@ -14,7 +14,7 @@
     background-repeat: no-repeat;
     background-position: center;
 }
-.submission {
+.submission-body {
     text-align: center;
 }
 
@@ -29,13 +29,14 @@
     <p>Made by Allen Cao</p>
 </div>
 
-<body class=submission>
+<body class=submission-body>
     Want to receive emails about new laws being passed?
-    <form><br>
-        Enter your first name: <input type="text" id="firstname" required/><br><br>
-        Enter your last name: <input type="text" id="lastname" required/><br><br>
-        Enter your email: <input type="text" id="email" required/><br><br>
-        <input type="submit" value="Submit" onclick="formdata()" required/><br>
+    <form id="submission"><br>
+        Enter your first name: <input type="text" id="firstname" placeholder="First Name" required/><br><br>
+        Enter your last name: <input type="text" id="lastname" placeholder="Last Name" required/><br><br>
+        Enter your email: <input type="email" id="email" placeholder="Email" required/><br><br>
+
+        <input type="submit" value="Submit" onclick="formdata()" /><br> 
     </form>
 
 </body>

@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/AllenCaoo/LawScraper/issues"
   },
-  "homepage": "https://github.com/AllenCaoo/LawScraper#readme"
+  "homepage": "https://github.com/AllenCaoo/LawScraper#readme",
+  "dependencies": {
+    "browserify-shim": "^3.8.14",
+    "requirejs": "^2.3.6",
+    "save": "^2.4.0"
+  }
 }

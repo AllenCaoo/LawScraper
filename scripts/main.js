@@ -1,4 +1,4 @@
-//import check from 'email-existence';
+var fs = require('fs');
 
 function formdata() {
     var first = document.getElementById("firstname").value.toLowerCase().replace(/\s/g, "");
@@ -7,9 +7,11 @@ function formdata() {
     //let exists = check(email, function(err, res) {
     //    console.log('res: '+res);
     //});
-    if (!validateEmail(email)) {
-        alert("invalid email")
+    if (first && last && email && validateEmail(email)) {
+        alert("You have subscribed");
+        saveInfo()
     }
+
 }
 
 function validateEmail(email) {
