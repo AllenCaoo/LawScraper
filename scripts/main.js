@@ -2,9 +2,9 @@
 
 const formdata = (ev)=>{
     ev.preventDefault();
-    var first = document.getElementById("firstname").replace(/\s/g, "");
-    var last = document.getElementById("lastname").replace(/\s/g, "");
-    var email = document.getElementById("email").value.toLowerCase().replace(/\s/g, "");
+    var first = document.getElementById("firstname").value.replace(/\s/g, "");
+    var last = document.getElementById("lastname").value.replace(/\s/g, "");
+    var email = document.getElementById("email").value.replace(/\s/g, "");
     //let exists = check(email, function(err, res) {
     //    console.log('res: '+res);
     //});
@@ -22,8 +22,18 @@ function validateEmail(email) {
 
 
 function saveInfo(name, email) {
+    /*
     let fileName = "backend/.info/subs.JSON";
-    var dict = fetch(fileName);
+    fetch(new Request(fileName))
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            console.log(data);
+        });
+    var dict = {};
+    */
+    var dict = JSON.parse(localStorage.getItem("nameToEmails")) || JSON.parse("{ }");
     dict[name] = email;
     var newData = JSON.stringify(dict);
     localStorage.setItem('nameToEmails', newData);
