@@ -21,7 +21,7 @@ function validateEmail(email) {
 
 function saveInfo(name, email) {
     let fileName = "backend/.info/subs.JSON";
-    var data = fs.readFileSync(fileName); // TODO: Error right here and needs to be fixed
+    var data = fs.loadJSON(fileName); // TODO: Error right here and needs to be fixed
     var dict = JSON.parse(data);
     let entry = {
         name: email
@@ -34,6 +34,11 @@ function saveInfo(name, email) {
         console.log("New data added");
     });
 }
+
+document.addEventListener('DOMContentLoaded', () =>{
+    document.getElementById('submit button').addEventListener('click', formdata);
+})
+
 window.formdata = formdata;
 window.validateEmail = validateEmail;
 window.saveInfo = saveInfo;

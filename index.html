@@ -5,8 +5,7 @@
 <title>LawScraper</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="">
-<script src="bundle.js"></script>
-<script data-main="bundle" src="scripts/require.js"></script>
+<script type="module" src="scripts/main.js"></script>
 <style>
 .title {
     height: 400px;
@@ -37,7 +36,7 @@
         Enter your last name: <input type="text" id="lastname" placeholder="Last Name" required/><br><br>
         Enter your email: <input type="email" id="email" placeholder="Email" required/><br><br>
 
-        <input type="submit" value="Submit" onclick="formdata()" /><br> 
+        <button id="submit button" type="submit">Submit</button> <br> 
     </form>
 
 </body>
