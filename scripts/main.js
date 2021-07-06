@@ -2,8 +2,8 @@
 
 const formdata = (ev)=>{
     ev.preventDefault();
-    var first = document.getElementById("firstname").value.toLowerCase().replace(/\s/g, "");
-    var last = document.getElementById("lastname").value.toLowerCase().replace(/\s/g, "");
+    var first = document.getElementById("firstname").replace(/\s/g, "");
+    var last = document.getElementById("lastname").replace(/\s/g, "");
     var email = document.getElementById("email").value.toLowerCase().replace(/\s/g, "");
     //let exists = check(email, function(err, res) {
     //    console.log('res: '+res);
@@ -22,11 +22,9 @@ function validateEmail(email) {
 
 
 function saveInfo(name, email) {
-    var dict = [];
-    let entry = {
-        name: email
-    }
-    dict.push(entry);
+    let fileName = "backend/.info/subs.JSON";
+    var dict = fetch(fileName);
+    dict[name] = email;
     var newData = JSON.stringify(dict);
     localStorage.setItem('nameToEmails', newData);
 }
