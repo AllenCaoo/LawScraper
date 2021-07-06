@@ -1,6 +1,7 @@
-var fs = require('fs');
 
-function formdata() {
+
+const formdata = (ev)=>{
+    ev.preventDefault();
     var first = document.getElementById("firstname").value.toLowerCase().replace(/\s/g, "");
     var last = document.getElementById("lastname").value.toLowerCase().replace(/\s/g, "");
     var email = document.getElementById("email").value.toLowerCase().replace(/\s/g, "");
@@ -10,6 +11,7 @@ function formdata() {
     if (first && last && email && validateEmail(email)) {
         alert("You have subscribed");
         saveInfo(first + " " + last, email);
+        document.forms[0].reset(); // reset form
     }
 }
 
@@ -20,19 +22,13 @@ function validateEmail(email) {
 
 
 function saveInfo(name, email) {
-    let fileName = "backend/.info/subs.JSON";
-    var data = fs.loadJSON(fileName); // TODO: Error right here and needs to be fixed
-    var dict = JSON.parse(data);
+    var dict = [];
     let entry = {
         name: email
     }
     dict.push(entry);
     var newData = JSON.stringify(dict);
-    fs.writeFile('data.json', newData, err => {
-        // error checking
-        if(err) throw err;
-        console.log("New data added");
-    });
+    localStorage.setItem('nameToEmails', newData);
 }
 
 document.addEventListener('DOMContentLoaded', () =>{
