@@ -1,5 +1,4 @@
 
-
 const formdata = (ev)=>{
     ev.preventDefault();
     var first = document.getElementById("firstname").value.replace(/\s/g, "");
@@ -22,8 +21,8 @@ function validateEmail(email) {
 
 
 function saveInfo(name, email) {
-    /*
     let fileName = "backend/.info/subs.JSON";
+    /*
     fetch(new Request(fileName))
         .then(function(response) {
             return response.json();
