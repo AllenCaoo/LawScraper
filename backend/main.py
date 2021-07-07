@@ -6,7 +6,7 @@ from Law import Law
 from bs4 import BeautifulSoup
 import smtplib
 from email.message import EmailMessage
-from datetime import date
+from datetime import date, datetime
 
 # IMPORTANT: RUN FROM THE OUTERMOST DIRECTORY
 link = "https://www.congress.gov/search?pageSort=latestAction%3Adesc&q=%7B%22source%22%3A%" \
@@ -14,13 +14,15 @@ link = "https://www.congress.gov/search?pageSort=latestAction%3Adesc&q=%7B%22sou
 
 EMAIL_ADDRESS = None
 password = None
+todate = None
 
 
-def main():
-    global EMAIL_ADDRESS, password
+def run():
+    global EMAIL_ADDRESS, password, todate
     print(os.getcwd())
     EMAIL_ADDRESS = input("Email? ")
     password = getpass.getpass(prompt="Password? ")
+    todate = date.today().strftime("%B %d, %Y")
     # re_init()
     message = make_email_message()
     send_email(message)
@@ -37,20 +39,19 @@ def make_email_message():
     for law in law_blocks:
         if law.title == recent_title:
             break
-        message += f"<h1>{law.title}</h1>"
+        message += f"<h2> {law.title} </h2>"
         message += f"<p style='color:SlateGray;'> {law.get_summary()} </p>"
     if message:
+        message += f"[{datetime.now().strftime('%H:%M:%S')}] End of message"
         return message + "</body></html>"
     return None
 
 
 def send_email(message):
     msg = EmailMessage()
-    d = date.today().strftime("%B %d, %Y")
-    msg['Subject'] = 'New Laws Passed on {today}!'.format(today=d)
+    msg['Subject'] = 'New Laws Passed on {today}!'.format(today=todate)
     msg['From'] = EMAIL_ADDRESS
-    msg['To'] = 'johndoe@gmail.com'  # Change later
-    msg.set_content("HELLO! New laws passed!")
+    msg['To'] = 'allen.cao.ezio@gmail.com'  # Change later
     msg.add_alternative(message, subtype='html')
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         smtp.login(EMAIL_ADDRESS, password)
@@ -77,4 +78,4 @@ def re_init(ask=False):
 
 
 if __name__ == "__main__":
-    main()
+    run()
