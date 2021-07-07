@@ -19,13 +19,26 @@ todate = None
 
 def run():
     global EMAIL_ADDRESS, password, todate
-    print(os.getcwd())
     EMAIL_ADDRESS = input("Email? ")
     password = getpass.getpass(prompt="Password? ")
-    todate = date.today().strftime("%B %d, %Y")
-    # re_init()
-    message = make_email_message()
-    send_email(message)
+    while True:
+        todate = date.today().strftime("%B %d, %Y")
+        message = make_email_message()
+        send_email(message)
+        re_init()
+        wait()
+
+
+def wait():
+    f = open("backend/.info/next-send.txt", "r")
+    target_time = int(f.read().strip())
+    f.close()
+    while time.time() < target_time:
+        time.sleep(10)
+    f = open("backend/.info/next-send.txt", "w")
+    f.write(str(target_time + 86400))
+    f.close()
+
 
 
 def make_email_message():
@@ -49,7 +62,7 @@ def make_email_message():
 
 def send_email(message):
     msg = EmailMessage()
-    msg['Subject'] = 'New Laws Passed on {today}!'.format(today=todate)
+    msg['Subject'] = 'New Federal Laws Passed on {today}!'.format(today=todate)
     msg['From'] = EMAIL_ADDRESS
     msg['To'] = 'allen.cao.ezio@gmail.com'  # Change later
     msg.add_alternative(message, subtype='html')
