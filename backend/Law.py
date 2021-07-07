@@ -15,10 +15,11 @@ class Law:
         self.action_link = "http://congress.gov" + action_link
         self.summary = None
         self.info_link = None
+        self.html = ""
 
-    def get_summary(self):
-        if self.summary:
-            return self.summary
+    def get_contents(self):
+        if self.summary and self.html:
+            return {"summary:": self.summary, "html": self.html}
         if not self.info_link:
             r = requests.get(self.action_link)
             soup = BeautifulSoup(r.content, "html.parser")
@@ -30,22 +31,34 @@ class Law:
         r = requests.get(self.info_link)
         soup = BeautifulSoup(r.content, "html.parser")
         summary_element = soup.find("div", id="latestSummary-content")
-        paragraphs = summary_element.find_all("p")  # TODO: include "li" elements
-        summary = ""
+        paragraphs = summary_element.find_all(["p", "ul"])  # TODO: include "li" elements
+        self.summary = ""
+        self.html = f"<!DOCTYPE html><html><body><h2>{self.title}</h2>"
         for p in paragraphs:
-            summary += p.text
-            summary += "\n\n"
-        self.summary = summary
-        return summary
+            if p.name == "ul":
+                self.html += "<ul>"
+                bullet_pts = p.find_all("li")
+                for pt in bullet_pts:
+                    if pt.text:
+                        self.summary += f"* {pt.text}"
+                        self.summary += "\n\n"
+                        self.html += f"<li style='color:SlateGray;'>{pt.text}<li>"
+                continue
+            self.summary += p.text
+            self.summary += "\n\n"
+            self.html += f"<p style='color:SlateGray;'>{p.text}</p>"
+        self.html += "</body></html>"
+        return {"summary": self.summary, "html": self.html}
 
 
     def __repr__(self):
         message = "The '"+ self.title + "' bill was just passed. \n\n" \
                   "It was sponsored by " +  self.sponsor + "\n\n" + \
                   "Here is a quick summary: \n\n" + \
-                  self.get_summary() + "\n\n"
+                  self.get_contents()["summary"] + "\n\n"
         return message
 
     def __str__(self):
         return self.__repr__()
+
 

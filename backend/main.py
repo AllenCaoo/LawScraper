@@ -20,12 +20,12 @@ def run():
     global EMAIL_ADDRESS, password, todate
     EMAIL_ADDRESS = input("Email? ")
     password = getpass.getpass(prompt="Password? ")
-    while True:
-        wait()
-        todate = date.today().strftime("%B %d, %Y")
-        message = make_email_message()
-        send_email(message)
-        re_init()
+    # while True:
+        #wait()
+    todate = date.today().strftime("%B %d, %Y")
+    message = make_email_message()
+    send_email(message)
+    #re_init()
 
 
 def wait():
@@ -44,15 +44,14 @@ def make_email_message():
     r = requests.get(link)
     soup = BeautifulSoup(r.content, "html.parser")
     law_blocks = [Law(law) for law in soup.find_all(class_="expanded", limit=10)]
-    message = "<!DOCTYPE html><html><body>"
+    message = ""
     for law in law_blocks:
         if law.title == recent_title:
             break
-        message += f"<h2> {law.title} </h2>"
-        message += f"<p style='color:SlateGray;'> {law.get_summary()} </p>"
+        message += law.get_contents()["html"]
     if message:
         message += f"[{datetime.now().strftime('%H:%M:%S')}] End of message"
-        return message + "</body></html>"
+        return message
     return None
 
 
