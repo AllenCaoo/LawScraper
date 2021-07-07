@@ -43,6 +43,7 @@ class Law:
                         self.summary += f"* {pt.text}"
                         self.summary += "\n\n"
                         self.html += f"<li style='color:SlateGray;'>{pt.text}<li>"
+                        # TODO: fix appearance of extra non-gray bullet points
                 continue
             self.summary += p.text
             self.summary += "\n\n"
