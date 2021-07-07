@@ -33,13 +33,14 @@ def make_email_message():
     r = requests.get(link)
     soup = BeautifulSoup(r.content, "html.parser")
     law_blocks = [Law(law) for law in soup.find_all(class_="expanded", limit=10)]
-    message = ""
+    message = "<!DOCTYPE html><html><body>"
     for law in law_blocks:
         if law.title == recent_title:
             break
-        message += str(law)
+        message += f"<h1>{law.title}</h1>"
+        message += f"<p style='color:SlateGray;'> {law.get_summary()} </p>"
     if message:
-        return message
+        return message + "</body></html>"
     return None
 
 
@@ -48,8 +49,9 @@ def send_email(message):
     d = date.today().strftime("%B %d, %Y")
     msg['Subject'] = 'New Laws Passed on {today}!'.format(today=d)
     msg['From'] = EMAIL_ADDRESS
-    msg['To'] = 'allen.cao.ezio@gmail.com'  # Change later
-    msg.set_content(message)
+    msg['To'] = 'johndoe@gmail.com'  # Change later
+    msg.set_content("HELLO! New laws passed!")
+    msg.add_alternative(message, subtype='html')
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         smtp.login(EMAIL_ADDRESS, password)
         smtp.send_message(msg)
