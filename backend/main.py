@@ -20,6 +20,18 @@ def run():
     global EMAIL_ADDRESS, password, todate
     EMAIL_ADDRESS = input("Email? ")
     password = getpass.getpass(prompt="Password? ")
+    while True:
+        wait()
+        todate = date.today().strftime("%B %d, %Y")
+        message = make_email_message()
+        send_email(message)
+        re_init()
+
+
+def debug():
+    global EMAIL_ADDRESS, password, todate
+    EMAIL_ADDRESS = input("Email? ")
+    password = getpass.getpass(prompt="Password? ")
     # while True:
         #wait()
     todate = date.today().strftime("%B %d, %Y")
