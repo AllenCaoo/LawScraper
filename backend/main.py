@@ -1,5 +1,4 @@
 import getpass
-import os
 import requests
 import time
 from Law import Law
@@ -22,11 +21,11 @@ def run():
     EMAIL_ADDRESS = input("Email? ")
     password = getpass.getpass(prompt="Password? ")
     while True:
+        wait()
         todate = date.today().strftime("%B %d, %Y")
         message = make_email_message()
         send_email(message)
         re_init()
-        wait()
 
 
 def wait():
@@ -35,9 +34,6 @@ def wait():
     f.close()
     while time.time() < target_time:
         time.sleep(10)
-    f = open("backend/.info/next-send.txt", "w")
-    f.write(str(target_time + 86400))
-    f.close()
 
 
 
@@ -82,8 +78,14 @@ def re_init(ask=False):
         r = requests.get(link)
         soup = BeautifulSoup(r.content, "html.parser")
         recent_title = soup.find(class_="result-title bottom-padding").text.strip()
-        f = open(".info/most-recent.txt", "w")
+        f = open("backend/.info/most-recent.txt", "w")
         f.write(recent_title)
+        f.close()
+
+        curr_time = time.time()
+        next_time = curr_time + (86400 - curr_time % 86400)
+        f = open("backend/.info/next-send.txt", "w")
+        f.write(str(next_time))
         f.close()
     else:
         re_init()
