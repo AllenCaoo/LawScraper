@@ -95,7 +95,7 @@ def re_init(ask=False):
         curr_time = time.time()
         next_time = curr_time + (86400 - curr_time % 86400)
         f = open("backend/.info/next-send.txt", "w")
-        f.write(str(next_time))
+        f.write(str(int(next_time)))
         f.close()
     else:
         re_init()
