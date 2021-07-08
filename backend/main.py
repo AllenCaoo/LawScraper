@@ -8,6 +8,7 @@ from email.message import EmailMessage
 from datetime import date, datetime
 
 # IMPORTANT: RUN FROM THE OUTERMOST DIRECTORY
+# To install packages: pip install -r requirements.txt
 link = "https://www.congress.gov/search?pageSort=latestAction%3Adesc&q=%7B%22source%22%3A%" \
        "22legislation%22%2C%22bill-status%22%3A%22law%22%7D"
 
