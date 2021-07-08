@@ -33,21 +33,21 @@ class Law:
         summary_element = soup.find("div", id="latestSummary-content")
         paragraphs = summary_element.find_all(["p", "ul"])  # TODO: include "li" elements
         self.summary = ""
-        self.html = f"<!DOCTYPE html><html><body><h2>{self.title}</h2>"
+        self.html = "<!DOCTYPE html><html><body><h2>{title}</h2>".format(title=self.title)
         for p in paragraphs:
             if p.name == "ul":
                 self.html += "<ul>"
                 bullet_pts = p.find_all("li")
                 for pt in bullet_pts:
                     if pt.text:
-                        self.summary += f"* {pt.text}"
+                        self.summary += "* {text}".format(text=pt.text)
                         self.summary += "\n\n"
-                        self.html += f"<li style='color:SlateGray;'>{pt.text}<li>"
+                        self.html += "<li style='color:SlateGray;'>{text}<li>".format(text=pt.text)
                         # TODO: fix appearance of extra non-gray bullet points
                 continue
             self.summary += p.text
             self.summary += "\n\n"
-            self.html += f"<p style='color:SlateGray;'>{p.text}</p>"
+            self.html += "<p style='color:SlateGray;'>{text}</p>".format(text=p.text)
         self.html += "</body></html>"
         return {"summary": self.summary, "html": self.html}
 

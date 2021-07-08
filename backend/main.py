@@ -59,7 +59,8 @@ def make_email_message():
             break
         message += law.get_contents()["html"]
     if message:
-        message += f"[{datetime.now().strftime('%H:%M:%S')}] End of message"
+        message += "[{time}] End of message"\
+            .format(time=datetime.now().strftime('%H:%M:%S'))
         return message
     return None
 
