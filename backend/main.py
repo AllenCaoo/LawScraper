@@ -69,7 +69,7 @@ def send_email(message):
     msg = EmailMessage()
     msg['Subject'] = 'New Federal Laws Passed on {today}!'.format(today=todate)
     msg['From'] = EMAIL_ADDRESS
-    msg['To'] = 'allen.cao.ezio@gmail.com'  # Change later
+    msg['To'] = ['jdoe@gmail.com']  # Change later
     msg.add_alternative(message, subtype='html')
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         smtp.login(EMAIL_ADDRESS, password)
