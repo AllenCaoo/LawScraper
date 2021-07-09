@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<meta charset="UTF-8">
+<title>LawScraper</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="">
+<script type="text/javascript" src="backend/.info/subs.JSON"></script>
+<script type="module" src="scripts/main.js"></script>
+<style>
+.title {
+    height: 400px;
+    text-align: center;
+    background-image: url('/images/flag_congress.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.submission-body {
+    text-align: center;
+}
+
+.body {
+    text-align: center;
+}
+
+</style>
+
+<div class="title">
+    <h1>Welcome to LawScraper</h1>
+    <p>Made by Allen Cao</p>
+</div>
+
+<body class=submission-body>
+    Want to receive emails about new laws being passed?
+    <form id="submission"><br>
+        Enter your first name: <input type="text" id="firstname" placeholder="First Name" required/><br><br>
+        Enter your last name: <input type="text" id="lastname" placeholder="Last Name" required/><br><br>
+        Enter your email: <input type="email" id="email" placeholder="Email" required/><br><br>
+
+        <button id="submit button" type="submit">Submit</button> <br> 
+    </form>
+
+</body>
+
+</html>
