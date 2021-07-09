@@ -5,9 +5,12 @@
 <title>LawScraper</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="">
-<script type="text/javascript" src="backend/.info/subs.JSON"></script>
-<script type="module" src="scripts/main.js"></script>
+<script type="text/javascript" src="/src/subs.JSON"></script>
 <style>
+body {
+  background: #333;
+  color: #fff;
+}
 .title {
     height: 400px;
     text-align: center;
@@ -32,10 +35,13 @@
 
 <body class=submission-body>
     Want to receive emails about new laws being passed?
-    <form id="submission"><br>
-        Enter your first name: <input type="text" id="firstname" placeholder="First Name" required/><br><br>
-        Enter your last name: <input type="text" id="lastname" placeholder="Last Name" required/><br><br>
-        Enter your email: <input type="email" id="email" placeholder="Email" required/><br><br>
+    <form id="submission" method="post" action="/views/index.html"><br>
+        Enter your first name: <input type="text" id="firstname" 
+            name="firstname" placeholder="First Name" required/><br><br>
+        Enter your last name: <input type="text" id="lastname"
+            name="lastname" placeholder="Last Name" required/><br><br>
+        Enter your email: <input type="email" id="email"
+            name="email" placeholder="Email" required/><br><br>
 
         <button id="submit button" type="submit">Submit</button> <br> 
     </form>

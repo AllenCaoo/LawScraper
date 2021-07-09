@@ -1,12 +1,12 @@
 const fs = require('fs');
 
-const formdata = (name, email)=>{
+const formdata = (name, email) => {
     // ev.preventDefault();
     if (first && last && email && validateEmail(email)) {
-        alert("You have subscribed");
         saveInfo(first + " " + last, email);
-        document.forms[0].reset(); // reset form
+        return true;
     }
+    return false;
 }
 
 function validateEmail(email) {
@@ -14,4 +14,8 @@ function validateEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
-module.exports = {formdata, validateEmail};
+function saveInfo(name, email) {
+    // TODO: save info to subs.JSON
+}
+
+module.exports = {formdata, validateEmail, saveInfo};
