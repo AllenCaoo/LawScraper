@@ -25,7 +25,8 @@ def run():
         wait()
         todate = date.today().strftime("%B %d, %Y")
         message = make_email_message()
-        send_email(message)
+        if message:
+            send_email(message)
         re_init()
 
 
@@ -35,7 +36,8 @@ def debug():
     password = getpass.getpass(prompt="Password? ")
     todate = date.today().strftime("%B %d, %Y")
     message = make_email_message()
-    send_email(message)
+    if message:
+        send_email(message)
 
 
 def wait():
@@ -44,7 +46,6 @@ def wait():
     f.close()
     while time.time() < target_time:
         time.sleep(10)
-
 
 
 def make_email_message():
@@ -60,7 +61,7 @@ def make_email_message():
             break
         message += law.get_contents()["html"]
     if message:
-        message += "[{time}] End of message"\
+        message += "[{time}] End of message" \
             .format(time=datetime.now().strftime('%H:%M:%S'))
         return message
     return None
@@ -103,4 +104,4 @@ def re_init(ask=False):
 
 
 if __name__ == "__main__":
-    run()
+    debug()
