@@ -16,6 +16,15 @@ function validateEmail(email) {
 
 function saveInfo(name, email) {
     // TODO: save info to subs.JSON
+    path = 'public/src/subs.JSON';
+    var prevData = fs.readFileSync(path);
+    var prevDataObj = JSON.parse(prevData);
+    prevDataObj[name] = email;
+    var newData  = JSON.stringify(prevDataObj);
+    fs.writeFile(path, newData, err => {
+        if(err) throw err;
+        console.log("New data added");
+    });   
 }
 
 module.exports = {formdata, validateEmail, saveInfo};
