@@ -2,3 +2,5 @@ node_modules
 venv
 .idea
 backend/__pycache__/
+public/src/subs.JSON
+package-lock.json
