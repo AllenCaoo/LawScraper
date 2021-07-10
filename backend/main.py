@@ -1,4 +1,5 @@
 import getpass
+import json
 import requests
 import time
 from Law import Law
@@ -48,6 +49,14 @@ def wait():
         time.sleep(10)
 
 
+def get_subs():
+    subs_path = 'public/src/subs.JSON'  # Running script from LawScraper/
+    with open(subs_path) as json_file:
+        data = json.load(json_file)
+        entries = [(name, email) for name, email in data.items()]
+    return entries
+
+
 def make_email_message():
     f = open("backend/.info/most-recent.txt", "r")
     recent_title = f.read()
@@ -71,7 +80,7 @@ def send_email(message):
     msg = EmailMessage()
     msg['Subject'] = 'New Federal Laws Passed on {today}!'.format(today=todate)
     msg['From'] = EMAIL_ADDRESS
-    msg['To'] = ['jdoe@gmail.com']  # Change later
+    msg['To'] = [entry[1] for entry in get_subs()]  # Change later
     msg.add_alternative(message, subtype='html')
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         smtp.login(EMAIL_ADDRESS, password)
@@ -104,4 +113,4 @@ def re_init(ask=False):
 
 
 if __name__ == "__main__":
-    debug()
+    run()
