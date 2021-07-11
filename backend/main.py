@@ -24,10 +24,10 @@ def run():
     password = getpass.getpass(prompt="Password? ")
     while True:
         wait()
-        todate = date.today().strftime("%B %d, %Y")
         message = make_email_message()
-        if message:
-            send_email(message)
+        todate = date.today().strftime("%B %d, %Y")
+        send_email(message)
+        print_log(len(message) > 0, todate)
         re_init()
 
 
@@ -77,14 +77,23 @@ def make_email_message():
 
 
 def send_email(message):
-    msg = EmailMessage()
-    msg['Subject'] = 'New Federal Laws Passed on {today}!'.format(today=todate)
-    msg['From'] = EMAIL_ADDRESS
-    msg['To'] = [entry[1] for entry in get_subs()]  # Change later
-    msg.add_alternative(message, subtype='html')
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-        smtp.login(EMAIL_ADDRESS, password)
-        smtp.send_message(msg)
+    if message:
+        msg = EmailMessage()
+        msg['Subject'] = 'New Federal Laws Passed - {today}!'.format(today=todate)
+        msg['From'] = EMAIL_ADDRESS
+        msg['To'] = [entry[1] for entry in get_subs()]  # Change later
+        msg.add_alternative(message, subtype='html')
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+            smtp.login(EMAIL_ADDRESS, password)
+            smtp.send_message(msg)
+
+
+def print_log(sent, date):
+    if sent:
+        print("{date}: nothing send".format(date=date))
+    else:
+        print("{date}: send information on new laws".format(date=date))
+
 
 
 def re_init(ask=False):
@@ -113,4 +122,4 @@ def re_init(ask=False):
 
 
 if __name__ == "__main__":
-    run()
+    debug()
