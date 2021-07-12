@@ -2,7 +2,7 @@ import getpass
 import json
 import requests
 import time
-from Law import Law
+from Law import USLaw
 from bs4 import BeautifulSoup
 import smtplib
 from email.message import EmailMessage
@@ -63,7 +63,7 @@ def make_email_message():
     f.close()
     r = requests.get(link)
     soup = BeautifulSoup(r.content, "html.parser")
-    law_blocks = [Law(law) for law in soup.find_all(class_="expanded", limit=10)]
+    law_blocks = [USLaw(law) for law in soup.find_all(class_="expanded", limit=10)]
     message = ""
     for law in law_blocks:
         if law.title == recent_title:
@@ -122,4 +122,4 @@ def re_init(ask=False):
 
 
 if __name__ == "__main__":
-    debug()
+    run()

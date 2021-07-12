@@ -2,7 +2,8 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-class Law:
+
+class USLaw:
     def __init__(self, law_block):  # law_block is of expanded class
         self.title = law_block.find(class_="result-title").text.strip()
         self.sponsor = law_block.find(class_="result-item").find("a").text
@@ -16,6 +17,7 @@ class Law:
         self.summary = None
         self.info_link = None
         self.html = ""
+        self.get_contents()
 
     def get_contents(self):
         if self.summary and self.html:
