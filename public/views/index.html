@@ -43,6 +43,16 @@ body {
     height: 100px;
 }
 
+label{
+    display: inline-block;
+    clear: left;
+    width: 250px;
+    text-align: right;
+}
+input {
+  display: inline-block;
+}
+
 </style>
 
 <div class="title">
@@ -55,13 +65,12 @@ body {
     <div class="empty"></div>
     Want to receive emails about new laws being passed?
     <form id="submission" method="post" action="/views/index.html"><br>
-        Enter your first name: <input type="text" id="firstname" 
-            name="firstname" placeholder="First Name" required/><br><br>
-        Enter your last name: <input type="text" id="lastname"
-            name="lastname" placeholder="Last Name" required/><br><br>
-        Enter your email: <input type="email" id="email"
-            name="email" placeholder="Email" required/><br><br>
-
+        <label>Enter your first name: </label>
+            <input type="text" id="firstname" name="firstname" placeholder="First Name" required/><br><br>
+        <label>Enter your last name: </label>
+            <input type="text" id="lastname" name="lastname" placeholder="Last Name" required/><br><br>
+        <label>Enter your email: </label>
+            <input type="email" id="email" name="email" placeholder="Email" required/><br><br>
         <button id="submit button" type="submit">Submit</button> <br> 
     </form>
 
