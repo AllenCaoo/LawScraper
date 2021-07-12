@@ -20,3 +20,4 @@ Backend includes a web crawler that scrapes federal government websites for most
 ## Running Frontend:
 1. Go to ``` LawScraper/ ```
 2. Run ``` npm start ```
+3. Go to your preferred web browser and go to [localhost:3000/views/index.html](url)
