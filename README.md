@@ -15,7 +15,7 @@ Backend includes a web crawler that scrapes federal government websites for most
 
 ## Running Backend:
 1. Go to ``` LawScraper/ ```
-2. Run ``` python backend/main.py ```
+2. Run ``` python backend/us.py ```
 
 ## Running Frontend:
 1. Go to ``` LawScraper/ ```
